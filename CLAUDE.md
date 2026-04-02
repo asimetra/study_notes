@@ -116,3 +116,10 @@ Topics not yet written are **not** added to the list.
 
 5. **`vertical-align: sub` on `.dim` renders inconsistently.**
    → Fix: use `position: relative; top: 0.4em` instead.
+
+7. **Multiple examples in a section should use a 2-column grid, not stacked rows.**
+   → Fix: wrap examples in `<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8em 1.5em">`, each example pair (A → A^T) in one `.ex-item`.
+
+6. **Inline elements inside `.ex-item` (flex container) get gaps between them.**
+   `<i>A</i><sup>T</sup><span class="dim">3×2</span>` — each tag becomes a separate flex item, gap appears between A, T, and 3×2.
+   → Fix: wrap the whole label in a single `<span>`: `<span><i>A</i><sup>T</sup><span class="dim">3×2</span></span>`

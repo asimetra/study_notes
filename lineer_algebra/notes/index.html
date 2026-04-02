@@ -210,6 +210,7 @@
   <ol>
     <li><a href="#matris-giris">Matris Kavramına Giriş</a></li>
     <li><a href="#matris-cesitleri">Matris Çeşitleri</a></li>
+    <li><a href="#transpose">Bir Matrisin Devriği (Transpose)</a></li>
   </ol>
 </nav>
 
@@ -218,10 +219,10 @@
 <!-- ─────────────────────── -->
 <h3>1. Matris Nedir?</h3>
 
-<p>Matris, sayıların dikdörtgen düzenlemesiyle oluşan bir tablodur. Sütun sayısı bilinmeyen sayısını, satır sayısı denklem sayısını temsil eder.</p>
+<p>Çok bilinmeyenli sayı denklemlerinin düzenlemesiyle oluşan bir tablodur. Sütun sayısı bilinmeyen sayısını, satır sayısı denklem sayısını temsil eder.</p>
 
 <div class="concept-mat">
-  <div class="arrow-row">&nbsp;&nbsp;&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp; <span style="font-size:0.9em; color:#777">3 sütun</span></div>
+  <div class="arrow-row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp; <span style="font-size:0.9em; color:#777">3 sütun</span></div>
   <div class="mat-row-label">
     <span style="color:#777">2 satır →<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→</span>
     <span class="mat">
@@ -439,7 +440,7 @@
     <span class="mat">
       <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
         <span style="font-weight:bold">5</span><span style="color:#aaa">0</span><span style="color:#aaa">0</span>
-        <span style="color:#aaa">0</span><span style="font-weight:bold">1</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">0</span><span style="color:#aaa">0</span>
         <span style="color:#aaa">0</span><span style="color:#aaa">0</span><span style="font-weight:bold">3</span>
       </span>
     </span>
@@ -546,6 +547,93 @@
   </span>
   <span style="font-size:0.88em; color:#555">&larr; simetrik matris</span>
 </div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="transpose">Bir Matrisin Devriği <span style="font-weight:normal; font-size:0.9em">(Transpose)</span></h2>
+
+<p>Matrisin satırları sütun haline getirilir. <i>A</i>'nın devriği <i>A</i><sup>T</sup> ile gösterilir.</p>
+
+<div class="def">
+  <span class="var">A</span><sub><i>m</i>&times;<i>n</i></sub>
+  &nbsp;&rarr;&nbsp;
+  <span class="var">A</span><sup>T</sup><sub><i>n</i>&times;<i>m</i></sub>
+  &nbsp;&nbsp; Boyutlar yer değiştirir.
+</div>
+
+<hr>
+
+<h3>Örnekler</h3>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8em 1.5em; margin:0.5em 0 0.5em 0.5em; align-items:center">
+
+  <!-- Örnek 1: 2x3 → 3x2 -->
+  <div class="ex-item">
+    <span><i>A</i><span class="dim">2×3</span></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(3,auto)">
+      <span>1</span><span>2</span><span>3</span>
+      <span>4</span><span>5</span><span>6</span>
+    </span></span>
+    &rarr;
+    <span><i>A</i><sup>T</sup><span class="dim">3×2</span></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(2,auto)">
+      <span>1</span><span>4</span>
+      <span>2</span><span>5</span>
+      <span>3</span><span>6</span>
+    </span></span>
+  </div>
+
+  <!-- Örnek 2: 2x2 kare -->
+  <div class="ex-item">
+    <span><i>A</i></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(2,auto)">
+      <span>1</span><span>5</span>
+      <span>8</span><span>&minus;2</span>
+    </span></span>
+    &rarr;
+    <span><i>A</i><sup>T</sup></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(2,auto)">
+      <span>1</span><span>8</span>
+      <span>5</span><span>&minus;2</span>
+    </span></span>
+  </div>
+
+  <!-- Örnek 3: sütun vektörü → satır vektörü -->
+  <div class="ex-item">
+    <span><i>A</i></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:auto">
+      <span>1</span><span>2</span><span>3</span>
+    </span></span>
+    &rarr;
+    <span><i>A</i><sup>T</sup></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(3,auto)">
+      <span>1</span><span>2</span><span>3</span>
+    </span></span>
+  </div>
+
+  <!-- Örnek 4: 3x4 → 4x3 -->
+  <div class="ex-item">
+    <span><i>B</i><span class="dim">3×4</span></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(4,auto)">
+      <span>2</span><span>5</span><span>&minus;8</span><span>7</span>
+      <span>3</span><span>1</span><span>6</span><span>5</span>
+      <span>4</span><span>2</span><span>&minus;1</span><span>7</span>
+    </span></span>
+    &rarr;
+    <span><i>B</i><sup>T</sup><span class="dim">4×3</span></span> =
+    <span class="mat"><span class="mat-cells" style="grid-template-columns:repeat(3,auto)">
+      <span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>1</span><span>2</span>
+      <span>&minus;8</span><span>6</span><span>&minus;1</span>
+      <span>7</span><span>5</span><span>7</span>
+    </span></span>
+  </div>
+
+</div>
+
+<ul style="list-style:none; padding-left:0.3em; margin:0.6em 0; font-size:0.94em">
+  <li>* <span class="eq">(<i>A</i><sup>T</sup>)<sup>T</sup> = <i>A</i></span> &nbsp;&mdash;&nbsp; Bir matrisin devriğinin devriği kendisidir.</li>
+</ul>
 
 </body>
 </html>
