@@ -1,18 +1,14 @@
-# MATRIS NEDIR VE TEMEL MATRIS KAVRAMLARI
+# LINEER CEBIR: MODELLEME VE NOTASYON
 
-Bu doküman, doğrusal denklem sistemlerinin matris formunda nasıl modelleneceğini ve temel matris notasyonlarını tanımlamaktadır.
+## 1. LINEER SISTEMLERIN MATRIS FORMU
 
----
+[cite_start]Doğrusal denklem sistemleri, katsayıların ayrıştırılması yoluyla $AX = B$ formunda standardize edilir[cite: 678, 679].
 
-## 1. Denklem Sisteminin Soyutlanması
-
-Çok bilinmeyenli doğrusal denklem sistemleri, değişkenlerinden arındırılarak saf katsayı tablolarına dönüştürülür. 
-
-**Örnek Denklem Sistemi:**
+**Sistem:**
 $$3x - 2y - 5z = 10$$
 $$x + 6y + z = 8$$
 
-**Matris Formasyonuna Çevrilmesi:**
+**Matris Notasyonu:**
 $$
 \begin{bmatrix} 
 3 & -2 & -5 \\ 
@@ -29,38 +25,29 @@ z
 8 
 \end{bmatrix}
 $$
-Not: Yukarıdaki eşitlikte sol taraftaki ilk matris "Katsayılar Matrisi" olarak adlandırılır.
+
+> [cite_start]**Katsayılar Matrisi ($A$):** Bilinmeyen katsayılarını içeren $m \times n$ tablodur[cite: 686, 687].
 
 ---
 
-## 2. Boyut ve Kapasite Tanımlamaları
+## 2. BOYUT VE GÖSTERIM (DIMENSIONS)
 
-Bir matrisin mimarisi, sahip olduğu satır (m) ve sütun (n) sayıları ile belirlenir ve genel notasyonda "m x n" formatında ifade edilir.
+[cite_start]Matrisler büyük harflerle ($A, B, C$) simgelenir[cite: 163, 208]. [cite_start]Boyut, "Satır $\times$ Sütun" ($m \times n$) olarak tanımlanır[cite: 164].
 
-* **Satır Sayısı (m):** Sistemdeki toplam denklem sayısına eşittir.
-* **Sütun Sayısı (n):** Sistemdeki toplam bilinmeyen sayısına eşittir.
+* [cite_start]**Satır ($m$):** Denklem sayısı[cite: 159, 164].
+* [cite_start]**Sütun ($n$):** Bilinmeyen sayısı[cite: 159, 164].
 
----
-
-## 3. İsimlendirme ve Boyut Örnekleri
-
-Matrisler hiyerarşik olarak büyük harflerle (A, B, C) tanımlanırken, ilgili boyutlar alt indis olarak belirtilir.
-
-**Örnek 1 (3x3 Matris):**
-$$A = \begin{bmatrix} 1 & 2 & 1 \\ 0 & 1 & 3 \\ 4 & 5 & 2 \end{bmatrix}$$
-Boyutu: 3x3. Gösterimi: $A_{3 \times 3}$
-
-**Örnek 2 (2x3 Matris):**
-$$B = \begin{bmatrix} 1 & 0 & 2 \\ 1 & 1 & -3 \end{bmatrix}$$
-Boyutu: 2x3. Gösterimi: $B_{2 \times 3}$
+**Örnekler:**
+* [cite_start]$A_{3 \times 3} = \begin{bmatrix} 1 & 2 & 1 \\ 0 & 1 & 3 \\ 4 & 5 & 2 \end{bmatrix}$ (Kare Matris: $m = n$)[cite: 165, 168].
+* [cite_start]$B_{2 \times 3} = \begin{bmatrix} 1 & 0 & 2 \\ 1 & 1 & -3 \end{bmatrix}$[cite: 184].
 
 ---
 
-## 4. Eleman İndeksleme (Addressing)
+## 3. ELEMAN ADRESLEME (INDEXING)
 
-Matris içindeki her bir veri noktası, bulunduğu satır ve sütun numarasına göre küçük harflerle ($a_{ij}$) indekslenir. 
+[cite_start]Her eleman, bulunduğu satır ($i$) ve sütun ($j$) numarası ile $a_{ij}$ şeklinde adreslenir[cite: 161, 162].
 
-**İndeksleme Örneği:**
-$$A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}_{2 \times 3}$$
+$$A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \end{bmatrix}$$
 
-* $a_{13}$ Tanımı: Matrisin 1. satırında ve 3. sütununda bulunan spesifik elemanı (veriyi) temsil eder.
+* [cite_start]**İndis Kuralları:** İlk sayı ($i$) satırı, ikinci sayı ($j$) sütunu belirtir[cite: 161, 162].
+* [cite_start]**Örnek:** $a_{21}$, ikinci satırın birinci sütundaki elemanıdır[cite: 162].
