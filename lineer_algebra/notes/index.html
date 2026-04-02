@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lineer Cebir — Matris Kavramına Giriş</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 1em;
+      background: #fffff8;
+      color: #111;
+      max-width: 720px;
+      margin: 1.5em auto;
+      padding: 0 1.4em 3em;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 1.4em;
+      text-align: center;
+      border-bottom: 3px double #333;
+      padding-bottom: 0.3em;
+      margin: 0 0 0.2em;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      border-bottom: 1px solid #999;
+      padding-bottom: 0.1em;
+      margin: 1.2em 0 0.4em;
+    }
+
+    h3 {
+      font-size: 1em;
+      font-weight: bold;
+      font-style: italic;
+      margin: 0.9em 0 0.2em;
+    }
+
+    p { margin: 0.2em 0 0.35em; }
+    hr { border: none; border-top: 1px solid #ccc; margin: 0.8em 0; }
+
+    /* ── Bash-doc stil: inline metin sınıfları ── */
+
+    /* değişken adı: A, B, x, y, z */
+    .var {
+      font-family: "Courier New", monospace;
+      font-style: italic;
+      font-size: 0.97em;
+    }
+
+    /* denklem satırı */
+    .eq {
+      font-family: "Courier New", monospace;
+      background: #f0f0e8;
+      padding: 0.05em 0.35em;
+      border-radius: 2px;
+      font-size: 0.93em;
+      white-space: nowrap;
+    }
+
+    /* anahtar terim / tanım kelimesi */
+    .kw {
+      font-weight: bold;
+      font-variant: small-caps;
+      letter-spacing: 0.03em;
+    }
+
+    /* boyut etiketi: 3×3, 2×3 */
+    .dim {
+      font-family: "Courier New", monospace;
+      font-size: 0.72em;
+      position: relative;
+      top: 0.4em;
+      color: #444;
+    }
+
+    .note {
+      border-left: 3px solid #c88;
+      background: #fdf5f5;
+      padding: 0.25em 0.7em;
+      margin: 0.4em 0;
+      font-size: 0.9em;
+      color: #600;
+    }
+
+    /* ── Tanım kutusu ── */
+    .def {
+      border-left: 3px solid #888;
+      background: #f5f5ee;
+      padding: 0.3em 0.7em;
+      margin: 0.5em 0;
+      font-size: 0.93em;
+    }
+
+    /* ── Matris: köşeli parantez CSS ile ── */
+    .mat {
+      display: inline-flex;
+      align-items: center;
+      border-left: 2px solid #222;
+      border-right: 2px solid #222;
+      padding: 0.12em 0.5em;
+      vertical-align: middle;
+      margin: 0 0.1em;
+    }
+    .mat-cells {
+      display: grid;
+      gap: 0.05em 0.85em;
+      font-family: "Courier New", monospace;
+      font-size: 0.91em;
+      text-align: right;
+      line-height: 1.65;
+    }
+
+    /* matris + eşittir + matris satırı */
+    .mat-eq {
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+      flex-wrap: wrap;
+      margin: 0.4em 0 0.4em 1.2em;
+    }
+
+    /* ── Yan yana örnek ── */
+    .ex-row {
+      display: flex;
+      align-items: center;
+      gap: 2em;
+      flex-wrap: wrap;
+      margin: 0.45em 0 0.3em 0.8em;
+    }
+    .ex-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35em;
+      font-size: 0.96em;
+    }
+    .ex-note {
+      font-size: 0.82em;
+      color: #555;
+    }
+
+    /* ── Satır/sütun kavram gösterimi ── */
+    .concept-mat {
+      display: inline-block;
+      margin: 0.5em 0 0.5em 1em;
+      font-size: 0.9em;
+    }
+    .concept-mat .arrow-row {
+      font-family: "Courier New", monospace;
+      font-size: 0.88em;
+      color: #555;
+      margin-bottom: 0.15em;
+    }
+    .concept-mat .mat-row-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      font-family: "Courier New", monospace;
+      font-size: 0.88em;
+      color: #555;
+    }
+    .concept-mat .size-label {
+      font-family: "Courier New", monospace;
+      font-size: 0.85em;
+      color: #444;
+      margin-top: 0.1em;
+      margin-left: 2.2em;
+    }
+
+    /* ── İçindekiler ── */
+    nav.toc {
+      border: 1px solid #ccc;
+      background: #f9f9f2;
+      padding: 0.5em 1em 0.6em;
+      margin: 0.8em 0 1.2em;
+      font-size: 0.93em;
+    }
+    nav.toc p {
+      font-weight: bold;
+      font-variant: small-caps;
+      letter-spacing: 0.04em;
+      margin: 0 0 0.3em;
+      color: #444;
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.4em;
+    }
+    nav.toc li { margin: 0.15em 0; }
+    nav.toc a { color: #333; text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    nav.toc .disabled { color: #aaa; font-style: italic; }
+
+    @media (max-width: 500px) {
+      .ex-row { flex-direction: column; gap: 0.8em; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Lineer Cebir</h1>
+
+<nav class="toc">
+  <p>İçindekiler</p>
+  <ol>
+    <li><a href="#matris-giris">Matris Kavramına Giriş</a></li>
+    <li><a href="#matris-cesitleri">Matris Çeşitleri</a></li>
+  </ol>
+</nav>
+
+<h2 id="matris-giris">Matris Kavramına Giriş</h2>
+
+<!-- ─────────────────────── -->
+<h3>1. Matris Nedir?</h3>
+
+<p>Matris, sayıların dikdörtgen düzenlemesiyle oluşan bir tablodur. Sütun sayısı bilinmeyen sayısını, satır sayısı denklem sayısını temsil eder.</p>
+
+<div class="concept-mat">
+  <div class="arrow-row">&nbsp;&nbsp;&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp;↓&nbsp;&nbsp; <span style="font-size:0.9em; color:#777">3 sütun</span></div>
+  <div class="mat-row-label">
+    <span style="color:#777">2 satır →<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→</span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>2</span><span>0</span>
+        <span>2</span><span>5</span><span>8</span>
+      </span>
+    </span>
+  </div>
+  <div class="size-label">2&times;3</div>
+</div>
+
+<div class="def">
+  <span class="kw">Satır sayısı</span> = denklem sayısı &nbsp;|&nbsp;
+  <span class="kw">Sütun sayısı</span> = bilinmeyen sayısı
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>2. Lineer Sistemlerin Matris Formu</h3>
+
+<p>Doğrusal denklem sistemleri <span class="eq">AX = B</span> formuna dönüştürülür.</p>
+
+<p>Denklem sistemi:</p>
+<p style="margin-left:1.4em; line-height:2.1">
+  <span class="eq">3x &minus; 2y &minus; 5z = 10</span><br>
+  <span class="eq">x + 6y + z = 8</span>
+</p>
+
+<p>Katsayılar matrisi ile <span class="eq">AX = B</span>:</p>
+
+<div class="mat-eq">
+  <span class="var">A</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>3</span><span>&minus;2</span><span>&minus;5</span>
+      <span>1</span><span>6</span><span>1</span>
+    </span>
+  </span>
+  ,&nbsp;
+  <span class="var">X</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span><i>x</i></span><span><i>y</i></span><span><i>z</i></span>
+    </span>
+  </span>
+  ,&nbsp;
+  <span class="var">B</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>10</span><span>8</span>
+    </span>
+  </span>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>3. Boyut ve İsimlendirme</h3>
+
+<p>Matrisler <span class="var">A, B, C</span> gibi büyük harflerle isimlendirilir. Boyut <span class="kw">satır × sütun</span> olarak yazılır ve genellikle alt indis olarak belirtilir.</p>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <span class="var">A</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>2</span><span>1</span>
+        <span>0</span><span>1</span><span>3</span>
+        <span>4</span><span>5</span><span>2</span>
+      </span>
+    </span>
+    <span class="ex-note">&rarr; Boyutu = 3&times;3 &rarr; <span class="var">A</span><span class="dim">3×3</span> &nbsp;(kare matris)</span>
+  </div>
+</div>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <span class="var">B</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>0</span><span>2</span>
+        <span>1</span><span>1</span><span>&minus;3</span>
+      </span>
+    </span>
+    <span class="ex-note">&rarr; Boyutu = 2&times;3 &rarr; <span class="var">B</span><span class="dim">2×3</span></span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>4. Eleman Adresleme <span style="font-weight:normal; font-style:normal; font-size:0.9em">(Indexing)</span></h3>
+
+<p>Her eleman <span class="var">a<sub>ij</sub></span> ile gösterilir: <i>i</i> = satır, <i>j</i> = sütun numarası.</p>
+
+<div class="mat-eq">
+  <span class="var">A</span><span class="dim">2×3</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span><i>a</i><sub>11</sub></span><span><i>a</i><sub>12</sub></span><span><i>a</i><sub>13</sub></span>
+      <span><i>a</i><sub>21</sub></span><span><i>a</i><sub>22</sub></span><span><i>a</i><sub>23</sub></span>
+    </span>
+  </span>
+</div>
+
+<div class="def">
+  <b>Örnek:</b> <span class="var">a<sub>13</sub></span> &rarr; 1. satır, 3. sütundaki eleman
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="matris-cesitleri">Matris Çeşitleri</h2>
+
+<!-- ─────────────────────── -->
+<h3>1. Sıfır Matrisi</h3>
+
+<p>Tüm elemanları <b>0</b> olan matristir.</p>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <i>A</i> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>0</span><span>0</span>
+        <span>0</span><span>0</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <i>B</i> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>0</span><span>0</span><span>0</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>2. Kare Matris</h3>
+
+<div class="def">
+  <span class="kw">Satır sayısı = Sütun sayısı</span> olan matristir.
+</div>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <i>A</i><span class="dim">1×1</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>3</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <i>B</i><span class="dim">2×2</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>1</span><span>3</span>
+        <span>5</span><span>2</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <i>C</i><span class="dim">3×3</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>4</span><span>5</span>
+        <span>&minus;2</span><span>1</span><span>3</span>
+        <span>2</span><span>5</span><span>7</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<ul style="list-style:none; padding-left:0.3em; margin:0.3em 0; font-size:0.94em">
+  <li>* Sadece kare matrislerin <span class="kw">determinantı</span> vardır.</li>
+  <li>* Sadece kare matrislerin <span class="kw">tersi</span> alınabilir &nbsp;(<i>A</i><sup>&minus;1</sup>).</li>
+</ul>
+
+<div class="note">
+  Bir denklem sisteminde bilinmeyen sayısından az denklem varsa, sistem çözülemez.
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>3. Köşegen Matris <span style="font-weight:normal; font-style:normal; font-size:0.9em">(Diagonal Matrix)</span></h3>
+
+<p>Bir kare matristir. Köşegeni dışındaki tüm elemanları <b>0</b> olan matristir.</p>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span style="font-weight:bold">4</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">2</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span style="font-weight:bold">2</span><span style="color:#aaa">0</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">2</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="color:#aaa">0</span><span style="font-weight:bold">&minus;3</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span style="font-weight:bold">5</span><span style="color:#aaa">0</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">1</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="color:#aaa">0</span><span style="font-weight:bold">3</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<ul style="list-style:none; padding-left:0.3em; margin:0.3em 0; font-size:0.94em">
+  <li>* <span class="kw">Köşegenleştirme</span> işlemi bu matris türüyle ilgilidir.</li>
+  <li>* <span class="kw">Determinantı</span>, köşegenindeki elemanların çarpımına eşittir.</li>
+</ul>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>4. Alt ve Üst Üçgen Matris <span style="font-weight:normal; font-style:normal; font-size:0.9em">(Triangular)</span></h3>
+
+<p>İkisi de kare matristir.</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="flex-direction:column; align-items:center; gap:0.2em">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span style="font-weight:bold">1</span><span style="color:#aaa">0</span><span style="color:#aaa">0</span>
+        <span>2</span><span style="font-weight:bold">6</span><span style="color:#aaa">0</span>
+        <span>3</span><span>&minus;7</span><span style="font-weight:bold">4</span>
+      </span>
+    </span>
+    <span style="font-size:0.82em; color:#555">alt üçgen — lower triangular</span>
+  </div>
+  <div class="ex-item" style="flex-direction:column; align-items:center; gap:0.2em">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span style="font-weight:bold">9</span><span>6</span><span>2</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">5</span><span>2</span>
+        <span style="color:#aaa">0</span><span style="color:#aaa">0</span><span style="font-weight:bold">3</span>
+      </span>
+    </span>
+    <span style="font-size:0.82em; color:#555">üst üçgen — upper triangular</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>5. Birim Matris <span style="font-weight:normal; font-style:normal; font-size:0.9em">(Identity Matrix)</span></h3>
+
+<div class="def">
+  Kare ve köşegen matristir. Köşegenindeki tüm elemanlar <b>1</b>, diğerleri <b>0</b> olan matristir. <i>I</i> ile gösterilir.
+</div>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <i>I</i><sub>1</sub> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>1</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <i>I</i><sub>2</sub> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span style="font-weight:bold">1</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">1</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <i>I</i><sub>3</sub> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span style="font-weight:bold">1</span><span style="color:#aaa">0</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="font-weight:bold">1</span><span style="color:#aaa">0</span>
+        <span style="color:#aaa">0</span><span style="color:#aaa">0</span><span style="font-weight:bold">1</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<p style="margin-top:0.6em">Çarpmada etkisizdir: &nbsp;
+  <span class="eq">A &middot; I = A</span> &nbsp;&nbsp;
+  <span class="eq">I &middot; A = A</span>
+</p>
+<p><span class="eq">A &middot; A<sup>&minus;1</sup> = I</span> &nbsp;&rarr;&nbsp; matrislerin tersini bulmamızı sağlar.</p>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>6. Simetrik Matris</h3>
+
+<div class="def">
+  Kare matristir. Köşegenin alt ve üst tarafındaki elemanlar birbirleriyle aynıdır.
+</div>
+
+<div class="mat-eq">
+  <i>A</i> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span style="font-weight:bold">1</span><span>3</span><span>5</span>
+      <span>3</span><span style="font-weight:bold">2</span><span>7</span>
+      <span>5</span><span>7</span><span style="font-weight:bold">&minus;1</span>
+    </span>
+  </span>
+  <span style="font-size:0.88em; color:#555">&larr; simetrik matris</span>
+</div>
+
+</body>
+</html>
