@@ -232,6 +232,8 @@
     <li><a href="#gauss-yok-etme">Gauss Yok Etme Metodu</a></li>
     <li><a href="#gauss-jordan-yok-etme">Gauss-Jordan Yok Etme Metodu</a></li>
     <li><a href="#cozum-durumlari">Lineer Denklem Sistemlerinin Çözüm Durumları</a></li>
+    <li><a href="#eselon-matris">Eşelon Matris</a></li>
+    <li><a href="#eselonla-cozum">Lineer Denklem Sistemlerinin Eşelon Matris Haline Getirilerek Çözülmesi</a></li>
   </ol>
 </nav>
 
@@ -2548,6 +2550,413 @@
     <b>Çözüm:</b>
     <span class="eq">(<i>x</i>, <i>y</i>, <i>z</i>) = (a &minus; 3, a &minus; 2, a)</span>,
     <span class="eq">a ∈ R</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="eselon-matris">Eşelon Matris</h2>
+
+<p>Bir matrisin eşelon matris olabilmesi için belirli basamak düzenini sağlaması gerekir.</p>
+
+<h3>1. Eşelon Matris Olma Şartları</h3>
+
+<div class="def">
+  <b>1.</b> Tamamı 0 olan bir satır varsa, en altta olmalıdır.
+</div>
+
+<div class="def">
+  <b>2.</b> Sıfırdan farklı her satırın ilk sıfır olmayan elemanı <b>1</b> olmalıdır.
+</div>
+
+<div class="def">
+  <b>3.</b> Her satırdaki ilk 1, bir üst satırdaki ilk 1'in <b>sağında</b> olmalıdır.
+  Yani 1'ler basamak şeklinde ilerlemelidir.
+</div>
+
+<div class="def">
+  <b>4.</b> Her satırdaki ilk 1'in altında kalan tüm elemanlar <b>0</b> olmalıdır.
+</div>
+
+<div class="note">
+  Kısaca: 1'ler soldan sağa doğru basamak yapmalı, altlarında 0 bulunmalı ve tamamen 0 olan satırlar en alta inmelidir.
+</div>
+
+<hr>
+
+<h3>2. Örnekler</h3>
+
+<p><span class="kw">Eşelon matris örneği:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>&minus;1</span><span>1</span>
+      <span>0</span><span>1</span><span>2</span><span>0</span>
+      <span>0</span><span>0</span><span>0</span><span>0</span>
+    </span>
+  </span>
+  <span class="ex-note">1'ler basamak oluşturuyor ve 0 satırı en altta.</span>
+</div>
+
+<p><span class="kw">Eşelon matris değildir:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>&minus;1</span><span>1</span>
+      <span>0</span><span>0</span><span>1</span><span>0</span>
+      <span>0</span><span>1</span><span>0</span><span>0</span>
+    </span>
+  </span>
+  <span class="ex-note">3. satırdaki ilk 1, 2. satırdakinin soluna geçtiği için basamak bozulur.</span>
+</div>
+
+<p><span class="kw">Bir başka eşelon matris örneği:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>0</span><span>2</span><span>&minus;1</span>
+      <span>0</span><span>0</span><span>1</span><span>2</span>
+      <span>0</span><span>0</span><span>0</span><span>1</span>
+    </span>
+  </span>
+  <span class="ex-note">İlk 1'ler sağa kayarak ilerliyor.</span>
+</div>
+
+<hr>
+
+<h3>3. Örnek Soru</h3>
+
+<div class="question-block" id="eselon-matris-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>&minus;1</span><span>3</span><span>4</span>
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>3</span><span>1</span><span>2</span><span>6</span>
+      </span>
+    </span>
+    matrisini eşelon matris haline getiriniz.
+  </div>
+
+  <p>İlk satırda 1 ile başlamak için önce satır değiştirelim:</p>
+
+  <div class="mat-eq">
+    <span class="eq">S<sub>1</sub> &harr; S<sub>2</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>2</span><span>&minus;1</span><span>3</span><span>4</span>
+        <span>3</span><span>1</span><span>2</span><span>6</span>
+      </span>
+    </span>
+  </div>
+
+  <p>1. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;2S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;3S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>0</span><span>&minus;5</span><span>5</span><span>&minus;6</span>
+        <span>0</span><span>&minus;5</span><span>5</span><span>&minus;9</span>
+      </span>
+    </span>
+  </div>
+
+  <p>2. satırdaki öncü elemanı 1 yapalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;(1/5)S<sub>2</sub> &rarr; S<sub>2</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>0</span><span>1</span><span>&minus;1</span><span>6/5</span>
+        <span>0</span><span>&minus;5</span><span>5</span><span>&minus;9</span>
+      </span>
+    </span>
+  </div>
+
+  <p>2. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">5S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>0</span><span>1</span><span>&minus;1</span><span>6/5</span>
+        <span>0</span><span>0</span><span>0</span><span>&minus;3</span>
+      </span>
+    </span>
+  </div>
+
+  <p>Son satırın ilk sıfır olmayan elemanını 1 yapalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;(1/3)S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>5</span>
+        <span>0</span><span>1</span><span>&minus;1</span><span>6/5</span>
+        <span>0</span><span>0</span><span>0</span><span>1</span>
+      </span>
+    </span>
+    <span class="ex-note">eşelon matris</span>
+  </div>
+
+  <div class="note">
+    Burada 1'ler soldan sağa basamak yapıyor ve her öncü 1'in altında 0 bulunuyor. Bu yüzden elde edilen matris eşelon matristir.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="eselonla-cozum">Lineer Denklem Sistemlerinin Eşelon Matris Haline Getirilerek Çözülmesi</h2>
+
+<p>Bir doğrusal denklem sistemi eşelon matris biçimine getirilerek de çözülebilir. Bu yöntemde önce genişletilmiş matris yazılır, sonra satır işlemleri ile eşelon biçim elde edilir, en sonda temel ve serbest değişkenler belirlenir.</p>
+
+<div class="note">
+  Bu başlık altında kullanılan fikir, Gauss yok etme ile aynıdır. Fark şu: burada çözüm özellikle <b>eşelon biçim</b> üzerinden yorumlanır ve serbest değişkenler açıkça seçilir.
+</div>
+
+<h3>1. Üç Bilinmeyenli Örnek</h3>
+
+<div class="question-block" id="eselonla-cozum-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq">2<i>x</i> &minus; 4<i>y</i> + 6<i>z</i> = 10</span>
+    <span class="eq"><i>x</i> + 3<i>y</i> &minus; <i>z</i> = 5</span>
+    <span class="eq">3<i>x</i> &minus; 6<i>y</i> + 9<i>z</i> = 15</span>
+    lineer denklem sistemini eşelon matris formuna getirerek çözünüz.
+  </div>
+
+  <p>Genişletilmiş matris:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>&minus;4</span><span>6</span><span>|</span>
+        <span>1</span><span>3</span><span>&minus;1</span><span>|</span>
+        <span>3</span><span>&minus;6</span><span>9</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>10</span>
+        <span>5</span>
+        <span>15</span>
+      </span>
+    </span>
+  </div>
+
+  <p>İlk satırı sadeleştirelim:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(1/2)S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>3</span><span>|</span>
+        <span>1</span><span>3</span><span>&minus;1</span><span>|</span>
+        <span>3</span><span>&minus;6</span><span>9</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>5</span>
+        <span>15</span>
+      </span>
+    </span>
+  </div>
+
+  <p>1. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;3S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>3</span><span>|</span>
+        <span>0</span><span>5</span><span>&minus;4</span><span>|</span>
+        <span>0</span><span>0</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>0</span>
+        <span>0</span>
+      </span>
+    </span>
+  </div>
+
+  <p>2. satırı öncü 1 ile başlayacak hale getirelim:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(1/5)S<sub>2</sub> &rarr; S<sub>2</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>3</span><span>|</span>
+        <span>0</span><span>1</span><span>&minus;4/5</span><span>|</span>
+        <span>0</span><span>0</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>0</span>
+        <span>0</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Burada <span class="var">x</span> ve <span class="var">y</span> temel değişken, <span class="var">z</span> ise serbest değişkendir.
+    Çünkü 3. sütunda pivot yoktur.
+  </div>
+
+  <p><span class="eq"><i>z</i> = a</span> diyelim, <span class="eq">a ∈ R</span>.</p>
+
+  <p>2. satırdan:</p>
+
+  <div class="mat-eq">
+    <span class="eq"><i>y</i> &minus; (4/5)<i>z</i> = 0</span>
+    <span class="eq"><i>y</i> = 4a/5</span>
+  </div>
+
+  <p>1. satırdan:</p>
+
+  <div class="mat-eq">
+    <span class="eq"><i>x</i> &minus; 2<i>y</i> + 3<i>z</i> = 5</span>
+    <span class="eq"><i>x</i> &minus; 2(4a/5) + 3a = 5</span>
+    <span class="eq"><i>x</i> = 5 &minus; 7a/5</span>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i>, <i>y</i>, <i>z</i>) = (5 &minus; 7a/5, 4a/5, a)</span>,
+    <span class="eq">a ∈ R</span>
+  </div>
+</div>
+
+<hr>
+
+<h3>2. Dört Bilinmeyenli Örnek</h3>
+
+<div class="question-block" id="eselonla-cozum-soru-2">
+  <h4>2. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq"><i>x</i><sub>1</sub> &minus; 3<i>x</i><sub>2</sub> + <i>x</i><sub>3</sub> + 2<i>x</i><sub>4</sub> = 10</span>
+    <span class="eq"><i>x</i><sub>1</sub> &minus; 3<i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> + <i>x</i><sub>4</sub> = 8</span>
+    <span class="eq">2<i>x</i><sub>1</sub> &minus; 6<i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> + 4<i>x</i><sub>4</sub> = 20</span>
+    lineer denklem sisteminin çözümü nedir?
+  </div>
+
+  <div class="note">
+    Burada 3 denklem ve 4 bilinmeyen vardır. Bu yüzden serbest değişken çıkması beklenir.
+  </div>
+
+  <p>Genişletilmiş matris:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+        <span>1</span><span>&minus;3</span><span>1</span><span>2</span><span>|</span>
+        <span>1</span><span>&minus;3</span><span>2</span><span>1</span><span>|</span>
+        <span>2</span><span>&minus;6</span><span>2</span><span>4</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>10</span>
+        <span>8</span>
+        <span>20</span>
+      </span>
+    </span>
+  </div>
+
+  <p>1. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;2S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+        <span>1</span><span>&minus;3</span><span>1</span><span>2</span><span>|</span>
+        <span>0</span><span>0</span><span>1</span><span>&minus;1</span><span>|</span>
+        <span>0</span><span>0</span><span>0</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>10</span>
+        <span>&minus;2</span>
+        <span>0</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Bu matris eşelon biçimdedir. Burada <span class="var">x</span><sub>1</sub> ve <span class="var">x</span><sub>3</sub> temel değişken,
+    <span class="var">x</span><sub>2</sub> ve <span class="var">x</span><sub>4</sub> ise serbest değişkendir.
+  </div>
+
+  <p><span class="eq"><i>x</i><sub>2</sub> = a</span> ve <span class="eq"><i>x</i><sub>4</sub> = b</span> diyelim.</p>
+
+  <p>2. satırdan:</p>
+
+  <div class="mat-eq">
+    <span class="eq"><i>x</i><sub>3</sub> &minus; <i>x</i><sub>4</sub> = &minus;2</span>
+    <span class="eq"><i>x</i><sub>3</sub> = b &minus; 2</span>
+  </div>
+
+  <p>1. satırdan:</p>
+
+  <div class="mat-eq">
+    <span class="eq"><i>x</i><sub>1</sub> &minus; 3<i>x</i><sub>2</sub> + <i>x</i><sub>3</sub> + 2<i>x</i><sub>4</sub> = 10</span>
+    <span class="eq"><i>x</i><sub>1</sub> &minus; 3a + (b &minus; 2) + 2b = 10</span>
+    <span class="eq"><i>x</i><sub>1</sub> = 12 + 3a &minus; 3b</span>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>, <i>x</i><sub>4</sub>) = (12 + 3a &minus; 3b, a, b &minus; 2, b)</span>,
+    <span class="eq">a, b ∈ R</span>
   </div>
 </div>
 
