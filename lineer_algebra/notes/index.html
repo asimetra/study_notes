@@ -234,6 +234,7 @@
     <li><a href="#cozum-durumlari">Lineer Denklem Sistemlerinin Çözüm Durumları</a></li>
     <li><a href="#eselon-matris">Eşelon Matris</a></li>
     <li><a href="#eselonla-cozum">Lineer Denklem Sistemlerinin Eşelon Matris Haline Getirilerek Çözülmesi</a></li>
+    <li><a href="#indirgenmis-eselon-matris">İndirgenmiş Eşelon Matris</a></li>
   </ol>
 </nav>
 
@@ -2957,6 +2958,174 @@
     <b>Çözüm:</b>
     <span class="eq">(<i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>, <i>x</i><sub>4</sub>) = (12 + 3a &minus; 3b, a, b &minus; 2, b)</span>,
     <span class="eq">a, b ∈ R</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="indirgenmis-eselon-matris">İndirgenmiş Eşelon Matris <span style="font-weight:normal; font-size:0.9em">(Reduced Row Echelon Form)</span></h2>
+
+<div class="ex-row">
+  <div class="def" style="flex:1">
+    <span class="kw">Eşelon Matris</span><br>
+    Tamamı 0 olan satırlar varsa en altta bulunmalıdır.<br>
+    Sıfır olmayan her satırın ilk sıfırdan farklı elemanı 1 seçilir.<br>
+    Pivotlar yukarıdan aşağıya inerken sağa doğru kaymalıdır.<br>
+    Bu seçilen 1'e <b>pivot</b> denir ve pivotun altındaki elemanlar 0 olmalıdır.
+  </div>
+  <div class="note" style="flex:1">
+    <span class="kw">İndirgenmiş Eşelon Matris</span><br>
+    Matris önce eşelon matris yapılır.<br>
+    Sonra her pivotun <b>üst tarafı da 0</b> yapılır.
+  </div>
+</div>
+
+<div class="def">
+  Eşelon matristeki bu öncü 1'ler <span class="kw">pivot</span> olarak isimlendirilir.
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>3</span><span>1</span>
+      <span>0</span><span>0</span><span>1</span><span>2</span>
+      <span>0</span><span>0</span><span>0</span><span>1</span>
+    </span>
+  </span>
+  <span class="ex-note">eşelon matris</span>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>0</span><span>0</span>
+      <span>0</span><span>0</span><span>1</span><span>0</span>
+      <span>0</span><span>0</span><span>0</span><span>1</span>
+    </span>
+  </span>
+  <span class="ex-note">indirgenmiş eşelon matris</span>
+</div>
+
+<hr>
+
+<h3>Örnek Soru</h3>
+
+<div class="question-block" id="indirgenmis-eselon-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="var">A</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>3</span>
+        <span>2</span><span>4</span><span>1</span><span>5</span>
+        <span>&minus;3</span><span>&minus;6</span><span>2</span><span>1</span>
+      </span>
+    </span>
+    matrisini satırca <b>indirgenmiş eşelon matris</b> haline getiriniz.
+  </div>
+
+  <p>1. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;2S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">3S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>3</span>
+        <span>0</span><span>0</span><span>3</span><span>&minus;1</span>
+        <span>0</span><span>0</span><span>&minus;1</span><span>10</span>
+      </span>
+    </span>
+  </div>
+
+  <p>2. satırdaki pivotu 1 yapalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(1/3)S<sub>2</sub> &rarr; S<sub>2</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>3</span>
+        <span>0</span><span>0</span><span>1</span><span>&minus;1/3</span>
+        <span>0</span><span>0</span><span>&minus;1</span><span>10</span>
+      </span>
+    </span>
+  </div>
+
+  <p>3. sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>3</span>
+        <span>0</span><span>0</span><span>1</span><span>&minus;1/3</span>
+        <span>0</span><span>0</span><span>0</span><span>29/3</span>
+      </span>
+    </span>
+  </div>
+
+  <p>3. satırdaki pivotu 1 yapalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(3/29)S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>3</span>
+        <span>0</span><span>0</span><span>1</span><span>&minus;1/3</span>
+        <span>0</span><span>0</span><span>0</span><span>1</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Buraya kadar eşelon biçim elde edildi. İndirgenmiş eşelon için şimdi pivotların <b>üstü</b> de sıfırlanacaktır.
+  </div>
+
+  <p>4. sütundaki pivotun üstünü sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(1/3)S<sub>3</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;3S<sub>3</sub> + S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>0</span>
+        <span>0</span><span>0</span><span>1</span><span>0</span>
+        <span>0</span><span>0</span><span>0</span><span>1</span>
+      </span>
+    </span>
+  </div>
+
+  <p>3. sütundaki pivotun üstünü de sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">S<sub>2</sub> + S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>0</span><span>0</span>
+        <span>0</span><span>0</span><span>1</span><span>0</span>
+        <span>0</span><span>0</span><span>0</span><span>1</span>
+      </span>
+    </span>
+    <span class="ex-note">indirgenmiş eşelon matris</span>
   </div>
 </div>
 
