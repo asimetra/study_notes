@@ -144,6 +144,19 @@
       color: #555;
     }
 
+    .question-block {
+      border: 1px solid #d8d3bf;
+      background: #fffef6;
+      padding: 0.7em 0.9em 0.8em;
+      margin: 0.7em 0;
+    }
+
+    .question-block h4 {
+      margin: 0 0 0.45em;
+      font-size: 0.98em;
+      font-weight: bold;
+    }
+
     /* ── Satır/sütun kavram gösterimi ── */
     .concept-mat {
       display: inline-block;
@@ -210,7 +223,15 @@
   <ol>
     <li><a href="#matris-giris">Matris Kavramına Giriş</a></li>
     <li><a href="#matris-cesitleri">Matris Çeşitleri</a></li>
+    <li><a href="#matris-islemleri">Matris İşlemleri</a></li>
     <li><a href="#transpose">Bir Matrisin Devriği (Transpose)</a></li>
+    <li><a href="#lineer-denklem-sistemleri">Lineer Denklem Sistemleri ve Matrislerle Gösterimi</a></li>
+    <li><a href="#elementer-satir-islemleri">Elementer (Temel) Satır İşlemleri</a></li>
+    <li><a href="#satirca-denk-matrisler">Satırca Denk Matrisler</a></li>
+    <li><a href="#cozum-yontemleri">Lineer Denklem Sistemlerinin Çözüm Yöntemleri</a></li>
+    <li><a href="#gauss-yok-etme">Gauss Yok Etme Metodu</a></li>
+    <li><a href="#gauss-jordan-yok-etme">Gauss-Jordan Yok Etme Metodu</a></li>
+    <li><a href="#cozum-durumlari">Lineer Denklem Sistemlerinin Çözüm Durumları</a></li>
   </ol>
 </nav>
 
@@ -550,6 +571,559 @@
 
 <!-- ═══════════════════════════════════════ -->
 
+<h2 id="matris-islemleri">Matris İşlemleri</h2>
+
+<!-- ─────────────────────── -->
+<h3>1. Toplama ve Çıkarma</h3>
+
+<div class="note">
+  Toplama ve çıkarma için iki matrisin <b>boyutu aynı olmalıdır</b>.
+</div>
+
+<div class="mat-eq">
+  <span class="var">A</span><span class="dim">2×3</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>1</span><span>2</span><span>3</span>
+      <span>0</span><span>4</span><span>&minus;1</span>
+    </span>
+  </span>
+  ,&nbsp;
+  <span class="var">B</span><span class="dim">2×3</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>3</span><span>&minus;1</span><span>6</span>
+      <span>4</span><span>7</span><span>3</span>
+    </span>
+  </span>
+</div>
+
+<div class="mat-eq">
+  <span class="var">A</span> + <span class="var">B</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>4</span><span>1</span><span>9</span>
+      <span>4</span><span>11</span><span>2</span>
+    </span>
+  </span>
+  &nbsp;&nbsp;
+  <span class="var">A</span> &minus; <span class="var">B</span> =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>&minus;2</span><span>3</span><span>&minus;3</span>
+      <span>&minus;4</span><span>&minus;3</span><span>&minus;4</span>
+    </span>
+  </span>
+</div>
+
+<p><span class="kw">Soru:</span> A, B ve C matrisleri verilsin.</p>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <span>
+      <span class="var">A</span><span class="dim">3×2</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>1</span><span>2</span>
+          <span>&minus;1</span><span>3</span>
+          <span>4</span><span>7</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <span class="var">B</span><span class="dim">3×2</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>3</span><span>0</span>
+          <span>4</span><span>2</span>
+          <span>7</span><span>&minus;1</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <span class="var">C</span><span class="dim">2×3</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+          <span>1</span><span>2</span><span>1</span>
+          <span>0</span><span>1</span><span>3</span>
+        </span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8em 1.5em; margin:0.6em 0 0.2em 0.8em">
+  <div class="ex-item">
+    <span>
+      <b>(a)</b> <span class="var">A</span> + <span class="var">B</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>4</span><span>2</span>
+          <span>3</span><span>5</span>
+          <span>11</span><span>6</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <b>(b)</b> <span class="var">B</span> &minus; <span class="var">A</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>2</span><span>&minus;2</span>
+          <span>5</span><span>&minus;1</span>
+          <span>3</span><span>&minus;8</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item" style="grid-column: 1 / -1;">
+    <span>
+      <b>(c)</b> <span class="var">A</span> + <span class="var">C</span> &rarr;
+      <span class="ex-note">Toplanamaz (boyutlar uyuşmaz).</span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <b>(d)</b> <span class="var">B</span> + <span class="var">C</span><sup>T</sup> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>4</span><span>0</span>
+          <span>6</span><span>3</span>
+          <span>8</span><span>2</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <b>(e)</b> 2<span class="var">A</span> &minus; 3<span class="var">B</span> =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>&minus;7</span><span>4</span>
+          <span>&minus;14</span><span>0</span>
+          <span>&minus;13</span><span>17</span>
+        </span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>2. Çarpma</h3>
+
+<p><span class="var">A</span><span class="dim">m×n</span> &times; <span class="var">B</span><span class="dim">n×k</span> = <span class="var">C</span><span class="dim">m×k</span></p>
+
+<div class="note">
+  İlk matrisin <b>sütun sayısı</b>, ikinci matrisin <b>satır sayısına</b> eşit olmalıdır.
+</div>
+
+<p>Çarpma, 1. matrisin satırları ile 2. matrisin sütunları çarpılarak yapılır.</p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+      <span>1</span><span>2</span><span>&minus;1</span>
+      <span>3</span><span>1</span><span>4</span>
+    </span>
+  </span>
+  &times;
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+      <span>2</span><span>1</span>
+      <span>&minus;1</span><span>6</span>
+      <span>7</span><span>2</span>
+    </span>
+  </span>
+  =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+      <span>&minus;7</span><span>11</span>
+      <span>33</span><span>17</span>
+    </span>
+  </span>
+</div>
+
+<div style="margin-left:1.2em; margin-top:0.4em; line-height:1.9">
+  <div class="ex-note"><b>Hesaplama (satır &times; sütun):</b></div>
+  <div><span class="eq"><i>a</i><sub>11</sub> = 1&times;2 + 2&times;(&minus;1) + (&minus;1)&times;7 = &minus;7</span></div>
+  <div><span class="eq"><i>a</i><sub>12</sub> = 1&times;1 + 2&times;6 + (&minus;1)&times;2 = 11</span></div>
+  <div><span class="eq"><i>a</i><sub>21</sub> = 3&times;2 + 1&times;(&minus;1) + 4&times;7 = 33</span></div>
+  <div><span class="eq"><i>a</i><sub>22</sub> = 3&times;1 + 1&times;6 + 4&times;2 = 17</span></div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8em 1.5em; margin:0.6em 0 0.2em 0.8em">
+  <div class="ex-item">
+    <span>
+      <b>Ör.</b>
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+          <span>1</span><span>3</span><span>&minus;1</span>
+        </span>
+      </span>
+      &times;
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: auto">
+          <span>2</span><span>1</span><span>4</span>
+        </span>
+      </span>
+      =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: auto">
+          <span>1</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span>
+      <b>Ör.</b>
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>2</span><span>&minus;1</span>
+          <span>3</span><span>4</span>
+        </span>
+      </span>
+      &times;
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>3</span><span>1</span>
+          <span>5</span><span>2</span>
+        </span>
+      </span>
+      =
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>1</span><span>0</span>
+          <span>29</span><span>11</span>
+        </span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item" style="grid-column: 1 / -1;">
+    <span>
+      <b>Ör.</b>
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+          <span>2</span><span>&minus;1</span><span>5</span>
+          <span>6</span><span>1</span><span>7</span>
+        </span>
+      </span>
+      &times;
+      <span class="mat">
+        <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+          <span>1</span><span>6</span>
+          <span>3</span><span>1</span>
+          <span>5</span><span>4</span>
+          <span>8</span><span>5</span>
+        </span>
+      </span>
+      &rarr; <span class="ex-note">Çarpılamaz (boyutlar uyuşmaz).</span>
+    </span>
+  </div>
+</div>
+
+<hr>
+
+<!-- ─────────────────────── -->
+<h3>3. Matris İşlemleri Örnek Sorular</h3>
+
+<section class="question-block" id="matris-islemleri-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="var">A</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>0</span><span>&minus;1</span><span>0</span>
+        <span>0</span><span>0</span><span>&minus;1</span>
+        <span>0</span><span>0</span><span>0</span>
+      </span>
+    </span>
+    ve
+    <span class="var">B</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>1</span><span>2</span>
+        <span>2</span><span>1</span>
+        <span>3</span><span>3</span>
+      </span>
+    </span>
+    olmak üzere,
+    <span class="eq">X = A.X + B</span>
+    eşitliğini sağlayan <span class="var">X</span> matrisini bulunuz.
+  </div>
+
+  <div class="note">
+    Toplama yapılabildiği için <span class="eq">A.X</span> ile <span class="var">B</span> aynı boyutta olmalıdır.
+    <span class="var">B</span><span class="dim">3×2</span> olduğundan <span class="eq">A.X</span> de <span class="dim">3×2</span> boyutludur.
+    <span class="var">A</span><span class="dim">3×3</span> olduğuna göre, bu çarpımın sağlanabilmesi için
+    <span class="var">X</span> matrisi <span class="dim">3×2</span> olmalıdır.
+  </div>
+
+  <p>Önce <span class="var">X</span> matrisini bilinmeyenlerle yazalım:</p>
+
+  <div class="mat-eq">
+    <span class="var">X</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span><i>a</i><sub>1</sub></span><span><i>a</i><sub>2</sub></span>
+        <span><i>a</i><sub>3</sub></span><span><i>a</i><sub>4</sub></span>
+        <span><i>a</i><sub>5</sub></span><span><i>a</i><sub>6</sub></span>
+      </span>
+    </span>
+    <span class="dim">3×2</span>
+  </div>
+
+  <p><span class="var">A</span> matrisi ile çarptığımızda:</p>
+
+  <div class="mat-eq">
+    <span class="var">A.X</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;<i>a</i><sub>3</sub></span><span>&minus;<i>a</i><sub>4</sub></span>
+        <span>&minus;<i>a</i><sub>5</sub></span><span>&minus;<i>a</i><sub>6</sub></span>
+        <span>0</span><span>0</span>
+      </span>
+    </span>
+  </div>
+
+  <p>Şimdi denklemi yerine yazalım:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span><i>a</i><sub>1</sub></span><span><i>a</i><sub>2</sub></span>
+        <span><i>a</i><sub>3</sub></span><span><i>a</i><sub>4</sub></span>
+        <span><i>a</i><sub>5</sub></span><span><i>a</i><sub>6</sub></span>
+      </span>
+    </span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;<i>a</i><sub>3</sub></span><span>&minus;<i>a</i><sub>4</sub></span>
+        <span>&minus;<i>a</i><sub>5</sub></span><span>&minus;<i>a</i><sub>6</sub></span>
+        <span>0</span><span>0</span>
+      </span>
+    </span>
+    +
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>1</span><span>2</span>
+        <span>2</span><span>1</span>
+        <span>3</span><span>3</span>
+      </span>
+    </span>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8em 1.5em; margin:0.7em 0 0.2em 0.8em">
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>1</sub> = &minus;<i>a</i><sub>3</sub> + 1</span>
+    </div>
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>2</sub> = &minus;<i>a</i><sub>4</sub> + 2</span>
+    </div>
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>3</sub> = &minus;<i>a</i><sub>5</sub> + 2</span>
+    </div>
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>4</sub> = &minus;<i>a</i><sub>6</sub> + 1</span>
+    </div>
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>5</sub> = 3</span>
+    </div>
+    <div class="ex-item">
+      <span class="eq"><i>a</i><sub>6</sub> = 3</span>
+    </div>
+  </div>
+
+  <p>Bunlardan sırasıyla <span class="eq"><i>a</i><sub>3</sub> = &minus;1</span>, <span class="eq"><i>a</i><sub>4</sub> = &minus;2</span>, <span class="eq"><i>a</i><sub>1</sub> = 2</span> ve <span class="eq"><i>a</i><sub>2</sub> = 4</span> bulunur.</p>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="var">X</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>2</span><span>4</span>
+        <span>&minus;1</span><span>&minus;2</span>
+        <span>3</span><span>3</span>
+      </span>
+    </span>
+  </div>
+</section>
+
+<section class="question-block" id="matris-islemleri-soru-2">
+  <h4>2. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="var">A</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;1</span><span>&minus;3</span>
+      </span>
+    </span>
+    ,&nbsp;
+    <span class="var">B</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;6</span><span>&minus;3</span>
+        <span>&minus;3</span><span>6</span>
+      </span>
+    </span>
+    ve
+    <span class="var">C</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>&minus;3</span><span>&minus;4</span>
+      </span>
+    </span>
+    olarak veriliyor.
+    <span class="eq">A.(B.C) = (A.B).C</span>
+    ifadesinin doğru olup olmadığını belirleyiniz.
+  </div>
+
+  <div class="note">
+    Sol taraf için önce <span class="eq">B.C</span>, sağ taraf için önce <span class="eq">A.B</span> çarpımı yapılır.
+    Her iki çarpım da tanımlıdır; bu yüzden iki taraf da hesaplanabilir.
+  </div>
+
+  <p><span class="kw">Sol taraf:</span> Önce <span class="eq">B.C</span> hesaplanır.</p>
+
+  <div class="mat-eq">
+    <span class="var">B.C</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;6</span><span>&minus;3</span>
+        <span>&minus;3</span><span>6</span>
+      </span>
+    </span>
+    &times;
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>&minus;3</span><span>&minus;4</span>
+      </span>
+    </span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>30</span><span>&minus;15</span>
+      </span>
+    </span>
+  </div>
+
+  <div style="margin-left:1.2em; margin-top:0.3em; line-height:1.9">
+    <div><span class="eq"><i>a</i><sub>11</sub> = (&minus;6)&times;(&minus;3) + (&minus;3)&times;(&minus;4) = 18 + 12 = 30</span></div>
+    <div><span class="eq"><i>a</i><sub>21</sub> = (&minus;3)&times;(&minus;3) + 6&times;(&minus;4) = 9 &minus; 24 = &minus;15</span></div>
+  </div>
+
+  <div class="mat-eq">
+    <span class="var">A.(B.C)</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;1</span><span>&minus;3</span>
+      </span>
+    </span>
+    &times;
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>30</span><span>&minus;15</span>
+      </span>
+    </span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>15</span>
+      </span>
+    </span>
+    <span class="dim">1×1</span>
+  </div>
+
+  <div style="margin-left:1.2em; margin-top:0.3em; line-height:1.9">
+    <div><span class="eq">(&minus;1)&times;30 + (&minus;3)&times;(&minus;15) = &minus;30 + 45 = 15</span></div>
+  </div>
+
+  <p><span class="kw">Sağ taraf:</span> Önce <span class="eq">A.B</span> hesaplanır.</p>
+
+  <div class="mat-eq">
+    <span class="var">A.B</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;1</span><span>&minus;3</span>
+      </span>
+    </span>
+    &times;
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>&minus;6</span><span>&minus;3</span>
+        <span>&minus;3</span><span>6</span>
+      </span>
+    </span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>15</span><span>&minus;15</span>
+      </span>
+    </span>
+  </div>
+
+  <div style="margin-left:1.2em; margin-top:0.3em; line-height:1.9">
+    <div><span class="eq"><i>a</i><sub>11</sub> = (&minus;1)&times;(&minus;6) + (&minus;3)&times;(&minus;3) = 6 + 9 = 15</span></div>
+    <div><span class="eq"><i>a</i><sub>12</sub> = (&minus;1)&times;(&minus;3) + (&minus;3)&times;6 = 3 &minus; 18 = &minus;15</span></div>
+  </div>
+
+  <div class="mat-eq">
+    <span class="var">(A.B).C</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+        <span>15</span><span>&minus;15</span>
+      </span>
+    </span>
+    &times;
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>&minus;3</span><span>&minus;4</span>
+      </span>
+    </span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>15</span>
+      </span>
+    </span>
+    <span class="dim">1×1</span>
+  </div>
+
+  <div style="margin-left:1.2em; margin-top:0.3em; line-height:1.9">
+    <div><span class="eq">15&times;(&minus;3) + (&minus;15)&times;(&minus;4) = &minus;45 + 60 = 15</span></div>
+  </div>
+
+  <div class="def">
+    <b>Sonuç:</b>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>15</span>
+      </span>
+    </span>
+    <span class="dim">1×1</span>
+    =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>15</span>
+      </span>
+    </span>
+    <span class="dim">1×1</span>
+    olduğundan ifade doğrudur.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+
 <h2 id="transpose">Bir Matrisin Devriği <span style="font-weight:normal; font-size:0.9em">(Transpose)</span></h2>
 
 <p>Matrisin satırları sütun haline getirilir. <i>A</i>'nın devriği <i>A</i><sup>T</sup> ile gösterilir.</p>
@@ -634,6 +1208,1348 @@
 <ul style="list-style:none; padding-left:0.3em; margin:0.6em 0; font-size:0.94em">
   <li>* <span class="eq">(<i>A</i><sup>T</sup>)<sup>T</sup> = <i>A</i></span> &nbsp;&mdash;&nbsp; Bir matrisin devriğinin devriği kendisidir.</li>
 </ul>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="lineer-denklem-sistemleri">Lineer Denklem Sistemleri ve Matrislerle Gösterimi</h2>
+
+<h3>1. Doğrusal Lineer Denklem Sistemi</h3>
+
+<p>Bir lineer denklem sistemi, tüm bilinmeyenlerin <b>1. dereceden</b> olduğu denklem grubudur.</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="kw">Örnek:</span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq"><i>x</i> + 3<i>y</i> = 4</span></span>
+        <span><span class="eq">2<i>x</i> &minus; <i>y</i> = 10</span></span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item">
+    <span class="ex-note">Amaç: denklemlerin hepsini sağlayan bilinmeyenleri bulmaktır.</span>
+  </div>
+</div>
+
+<div class="note">
+  <span class="eq"><i>x</i><sup>2</sup> + <i>y</i> = 8</span>
+  lineer değildir; çünkü bilinmeyenlerden biri 1. dereceden değildir.
+</div>
+
+<hr>
+
+<h3>2. Denklem Sistemlerinin Matrislerle Gösterimi</h3>
+
+<p>Aşağıdaki denklem sistemi matris biçiminde yazılabilir:</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq">2<i>x</i> &minus; 3<i>y</i> = 10</span></span>
+        <span><span class="eq"><i>x</i> + 4<i>y</i> = 8</span></span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div class="mat-eq">
+  <span class="var">A</span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(2, auto)">
+      <span>2</span><span>&minus;3</span>
+      <span>1</span><span>4</span>
+    </span>
+  </span>
+  &times;
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span><i>x</i></span><span><i>y</i></span>
+    </span>
+  </span>
+  =
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>10</span><span>8</span>
+    </span>
+  </span>
+</div>
+
+<div class="def">
+  <span class="kw">Katsayılar matrisi</span> =
+  <span class="var">A</span>
+  ve genel gösterim
+  <span class="eq">A<i>x</i> = <i>b</i></span>
+  şeklindedir.
+</div>
+
+<hr>
+
+<h3>3. Genişletilmiş Katsayılar Matrisi <span style="font-weight:normal; font-style:normal; font-size:0.9em">(Augmented Matrix)</span></h3>
+
+<p>Sabit terimler son sütuna eklenerek <span class="kw">genişletilmiş katsayılar matrisi</span> elde edilir.</p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>3</span><span>&minus;2</span><span>|</span><span>5</span>
+      <span>1</span><span>1</span><span>|</span><span>4</span>
+      <span>3</span><span>1</span><span>|</span><span>6</span>
+    </span>
+  </span>
+</div>
+
+<p>Daha büyük bir örnek:</p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(6, auto)">
+      <span>2</span><span>5</span><span>&minus;1</span><span>4</span><span>|</span><span>5</span>
+      <span>7</span><span>1</span><span>2</span><span>6</span><span>|</span><span>8</span>
+      <span>0</span><span>0</span><span>3</span><span>1</span><span>|</span><span>&minus;3</span>
+    </span>
+  </span>
+</div>
+
+<div class="def">
+  Bu matris aşağıdaki denklem sistemine karşılık gelir:
+</div>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq">2<i>x</i> + 5<i>y</i> &minus; <i>z</i> + 4<i>t</i> = 5</span></span>
+        <span><span class="eq">7<i>x</i> + <i>y</i> + 2<i>z</i> + 6<i>t</i> = 8</span></span>
+        <span><span class="eq">3<i>z</i> + <i>t</i> = &minus;3</span></span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="elementer-satir-islemleri">Elementer (Temel) Satır İşlemleri</h2>
+
+<p>Aşağıdaki denklem sistemi, genişletilmiş katsayı matrisi ile birlikte ele alınabilir:</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq">2<i>x</i> &minus; 3<i>y</i> + 5<i>z</i> = 10</span></span>
+        <span><span class="eq"><i>x</i> + 2<i>y</i> &minus; 8<i>z</i> = &minus;5</span></span>
+        <span><span class="eq">4<i>x</i> + 3<i>y</i> + <i>z</i> = 1</span></span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+      <span>2</span><span>&minus;3</span><span>5</span><span>|</span><span>10</span>
+      <span>1</span><span>2</span><span>&minus;8</span><span>|</span><span>&minus;5</span>
+      <span>4</span><span>3</span><span>1</span><span>|</span><span>1</span>
+    </span>
+  </span>
+</div>
+
+<div class="def">
+  <span class="kw">Elementer satır işlemleri</span>, çözüm kümesini değiştirmeden satırlar üzerinde yapılan temel işlemlerdir.
+</div>
+
+<hr>
+
+<h3>1. Bir Satırı Sıfırdan Farklı Bir Sayı ile Çarpma</h3>
+
+<p>Genişletilmiş katsayı matrisinde istediğimiz bir satırı istediğimiz sayı ile çarpabiliriz.</p>
+
+<div class="mat-eq">
+  <span class="eq">4.S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  <span class="eq">4.R<sub>1</sub> &rarr; R<sub>1</sub></span>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+      <span>8</span><span>&minus;12</span><span>20</span><span>|</span><span>40</span>
+      <span>1</span><span>2</span><span>&minus;8</span><span>|</span><span>&minus;5</span>
+      <span>4</span><span>3</span><span>1</span><span>|</span><span>1</span>
+    </span>
+  </span>
+</div>
+
+<hr>
+
+<h3>2. İki Satırın Yerini Değiştirme</h3>
+
+<p>Genişletilmiş katsayı matrisinde istenildiğinde iki satırın yeri değiştirilebilir.</p>
+
+<div class="mat-eq">
+  <span class="eq">S<sub>1</sub> &harr; S<sub>2</sub></span>
+  <span class="eq">R<sub>1</sub> &harr; R<sub>2</sub></span>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+      <span>1</span><span>2</span><span>&minus;8</span><span>|</span><span>&minus;5</span>
+      <span>8</span><span>&minus;12</span><span>20</span><span>|</span><span>40</span>
+      <span>4</span><span>3</span><span>1</span><span>|</span><span>1</span>
+    </span>
+  </span>
+</div>
+
+<hr>
+
+<h3>3. Bir Satırın Katını Başka Bir Satıra Ekleme veya Çıkarma</h3>
+
+<p>Bir satır diğer bir satıra eklenebilir veya çıkarılabilir. Gerekirse bir satır önce bir sayı ile çarpılıp sonra başka bir satıra eklenir.</p>
+
+<div class="mat-eq">
+  <span class="eq">R<sub>1</sub> + R<sub>2</sub> &rarr; R<sub>2</sub></span>
+  <span class="eq">S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+</div>
+
+<div class="mat-eq">
+  <span class="eq">2.S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span><span>4</span>
+      <span>2</span><span>1</span><span>5</span><span>|</span><span>&minus;3</span>
+      <span>4</span><span>1</span><span>7</span><span>|</span><span>&minus;6</span>
+    </span>
+  </span>
+  <span class="eq">3.S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(5, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span><span>4</span>
+      <span>5</span><span>7</span><span>14</span><span>|</span><span>9</span>
+      <span>4</span><span>1</span><span>7</span><span>|</span><span>&minus;6</span>
+    </span>
+  </span>
+</div>
+
+<div class="note">
+  Bu işlemler özellikle doğrusal denklem sistemlerini çözmede ve matrisi satır indirgemede kullanılır.
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="satirca-denk-matrisler">Satırca Denk Matrisler</h2>
+
+<p>Bir matrise elementer satır işlemleri uygulanarak yeni bir matris elde ediliyorsa, bu iki matrise <span class="kw">satırca denk</span> denir.</p>
+
+<div class="ex-row">
+  <div class="ex-item">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>3</span><span>&minus;1</span>
+        <span>2</span><span>5</span><span>1</span><span>4</span>
+      </span>
+    </span>
+    <span>&rarr;</span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>a</span><span>b</span><span>c</span><span>d</span>
+        <span>e</span><span>f</span><span>g</span><span>h</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div class="def">
+  Örnek satır işlemleri:
+  <span class="eq">2.S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  <span class="eq">S<sub>1</sub> &harr; S<sub>2</sub></span>
+  <span class="eq">2.S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+</div>
+
+<p>Bu işlemler sonunda elde edilen matrisler başlangıç matrisi ile satırca denktir.</p>
+
+<hr>
+
+<h3>Örnek Soru</h3>
+
+<div class="question-block" id="satirca-denk-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="var">A</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span>
+        <span>3</span><span>1</span><span>4</span>
+        <span>5</span><span>2</span><span>1</span>
+      </span>
+    </span>
+    matrisine satırca denk bir matris yazınız.
+  </div>
+
+  <p><span class="kw">1. Yol:</span> İlk satırı 2 ile çarpalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">2.S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="var">B</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>2</span><span>4</span><span>&minus;2</span>
+        <span>3</span><span>1</span><span>4</span>
+        <span>5</span><span>2</span><span>1</span>
+      </span>
+    </span>
+    <span class="eq">A ≈ B</span>
+  </div>
+
+  <p><span class="kw">2. Yol:</span> İkinci satıra <span class="eq">&minus;3.S<sub>1</sub></span> ekleyelim.</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;3.S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="var">C</span> =
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span>
+        <span>0</span><span>&minus;5</span><span>7</span>
+        <span>5</span><span>2</span><span>1</span>
+      </span>
+    </span>
+    <span class="eq">A ≈ C</span>
+  </div>
+
+  <div class="note">
+    Aynı matrise farklı elementer satır işlemleri uygulanarak birden fazla satırca denk matris elde edilebilir.
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="cozum-yontemleri">Lineer Denklem Sistemlerinin Çözüm Yöntemleri</h2>
+
+<div class="def">
+  Çözüm yöntemleri genel olarak <b>iki ana başlıkta</b> toplanır.
+</div>
+
+<h3>1. Denklem Sayısı = Bilinmeyen Sayısı</h3>
+
+<p>Bu durumda kare bir sistem elde edilir. Aşağıdaki gibi örnekler bu sınıfa girer:</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq">2<i>x</i> &minus; 3<i>y</i> = 4</span></span>
+        <span><span class="eq"><i>x</i> + <i>y</i> = 5</span></span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq"><i>x</i> &minus; 2<i>y</i> + <i>z</i> = 8</span></span>
+        <span><span class="eq">2<i>x</i> &minus; 3<i>y</i> + <i>z</i> = 6</span></span>
+        <span><span class="eq"><i>x</i> + <i>z</i> = 10</span></span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<p>Bu tip sistemlerde kullanılabilecek başlıca yöntemler:</p>
+
+<ul style="list-style:none; padding-left:0.3em; margin:0.4em 0; font-size:0.95em">
+  <li>1. Gauss yok etme metodu</li>
+  <li>2. Gauss-Jordan yok etme metodu</li>
+  <li>3. Cramer metodu</li>
+  <li>4. <i>A</i><sup>&minus;1</sup> yardımıyla çözme metodu</li>
+  <li>5. Satırca eşelon form</li>
+  <li>6. Satırca indirgenmiş eşelon form</li>
+</ul>
+
+<hr>
+
+<h3>2. Denklem Sayısı ≠ Bilinmeyen Sayısı</h3>
+
+<p>Bu durumda denklem sayısı ile bilinmeyen sayısı eşit değildir. Aşağıdaki örnekler bu sınıfa girer:</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq">2<i>x</i> &minus; 3<i>y</i> = 6</span></span>
+        <span><span class="eq"><i>x</i> + <i>y</i> = 7</span></span>
+        <span><span class="eq">2<i>x</i> + <i>y</i> = 10</span></span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span><span class="eq"><i>x</i> &minus; 2<i>y</i> + <i>z</i> = 10</span></span>
+        <span><span class="eq">2<i>x</i> + <i>y</i> + 3<i>z</i> = 5</span></span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<p>Bu tip sistemlerde kullanılan temel yöntemler:</p>
+
+<ul style="list-style:none; padding-left:0.3em; margin:0.4em 0; font-size:0.95em">
+  <li>1. Satırca eşelon form yardımıyla çözüm</li>
+  <li>2. Satırca indirgenmiş eşelon form</li>
+</ul>
+
+<div class="note">
+  Özellikle denklem sayısı ile bilinmeyen sayısı eşit olmadığında, satır işlemlerine dayalı eşelon yöntemleri daha temel ve kullanışlıdır.
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="gauss-yok-etme">Gauss Yok Etme Metodu</h2>
+
+<p>Gauss yok etme metodu, doğrusal denklem sistemlerini <span class="kw">üst üçgen matris</span> biçimine getirip ardından geriye doğru çözmeye dayanır.</p>
+
+<div class="def">
+  Bu yöntem özellikle <b>denklem sayısı = bilinmeyen sayısı</b> olduğunda temel çözüm araçlarından biridir.
+</div>
+
+<h3>1. Genel Fikir</h3>
+
+<p>İlk adımda denklem sistemi genişletilmiş katsayılar matrisi şeklinde yazılır. İkinci adımda elementer satır işlemleri ile alt üçgendeki elemanlar sıfırlanır ve üst üçgen biçim elde edilir.</p>
+
+<div class="def">
+  <span class="kw">Temel mantık:</span>
+  Önce 1. sütunda, 1. satırdaki <b>pivot eleman</b> kullanılır ve onun altındaki elemanlar sıfır yapılır.
+  Sonra pivot konumu <b>bir satır aşağı</b> ve <b>bir sütun sağa</b> kayar.
+  Bu kez 2. satırdaki pivot kullanılarak 2. sütunun altındaki elemanlar sıfırlanır.
+  Aynı işlem bu düzenle devam eder ve matris üst üçgen biçime dönüşür.
+</div>
+
+<div class="note">
+  Pivotun bir satır aşağı geçmesinin sebebi, bir önceki sütunda elde edilen sıfırları bozmamaktır.
+  Eğer ikinci sütunu temizlerken yine 1. satırı kullanırsak, 1. sütunda daha once sıfırlanan elemanlar tekrar sıfırdan farklı olabilir.
+  Bu yüzden yeni adımda, solundaki sütunda zaten sıfır bulunan satır pivot olarak seçilir.
+  Yani her yeni pivot, hem <b>bir satır aşağı</b> hem de <b>bir sütun sağda</b> olur.
+</div>
+
+<div class="note">
+  Eğer ilk satırın ilk bilinmeyeni <b>0</b> ise, o satır pivot olarak kullanılamaz.
+  Böyle bir durumda önce alt satırlardan ilk sütunda sıfır olmayan bir satır seçilir ve
+  <span class="eq">S<sub>1</sub> &harr; S<sub>2</sub></span> gibi bir satır değiştirme işlemi yapılır.
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>0</span><span>2</span><span>1</span><span>|</span>
+      <span>3</span><span>1</span><span>&minus;4</span><span>|</span>
+      <span>1</span><span>5</span><span>2</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>7</span>
+      <span>6</span>
+      <span>3</span>
+    </span>
+  </span>
+  <span class="eq">S<sub>1</sub> &harr; S<sub>2</sub></span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>3</span><span>1</span><span>&minus;4</span><span>|</span>
+      <span>0</span><span>2</span><span>1</span><span>|</span>
+      <span>1</span><span>5</span><span>2</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>6</span>
+      <span>7</span>
+      <span>3</span>
+    </span>
+  </span>
+</div>
+
+<p>Burada artık 1. satırın ilk elemanı sıfır olmadığı için ilk sütundaki alt elemanlar bu satır kullanılarak yok edilebilir.</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>2</span><span>&minus;3</span><span>|</span>
+        <span>1</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>8</span>
+      </span>
+    </span>
+  </div>
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>1</span><span>&minus;1</span><span>|</span>
+        <span>2</span><span>1</span><span>&minus;5</span><span>|</span>
+        <span>1</span><span>6</span><span>&minus;8</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>8</span>
+        <span>10</span>
+        <span>11</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>1</span><span>2</span><span>|</span>
+      <span>0</span><span>3</span><span>1</span><span>|</span>
+      <span>0</span><span>0</span><span>2</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>5</span>
+      <span>4</span>
+      <span>6</span>
+    </span>
+  </span>
+  <span class="ex-note">üst üçgen biçim</span>
+</div>
+
+<div class="note">
+  Üst üçgen biçime geçildikten sonra son denklemden başlanarak bilinmeyenler geriye doğru bulunur.
+</div>
+
+<div class="def">
+  Bu örnekte:
+  <span class="eq">1. sütunda 1. satır kullanılır</span>
+  <span class="eq">2. sütunda 2. satır kullanılır</span>
+  <span class="eq">3. sütunda 3. satır zaten hazırdır</span>
+</div>
+
+<hr>
+
+<h3>2. Örnek Soru</h3>
+
+<div class="question-block" id="gauss-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq">2<i>x</i> + <i>y</i> = 10</span>
+    ve
+    <span class="eq"><i>x</i> + 3<i>y</i> = 8</span>
+    denklem sisteminin çözümü nedir?
+  </div>
+
+  <p>Önce genişletilmiş matris yazılır:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>2</span><span>1</span><span>|</span>
+        <span>1</span><span>3</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>10</span>
+        <span>8</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Burada ilk bilinmeyen <span class="var">x</span> için pivot, 1. satırdaki ilk elemandır.
+    Bu yüzden önce 2. satırın ilk sütunundaki eleman sıfırlanır.
+  </div>
+
+  <p>Birinci sütunun altını sıfırlamak için <span class="eq">&minus;(1/2)S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span> uygulanır:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(3, auto)">
+        <span>2</span><span>1</span><span>|</span>
+        <span>0</span><span>5/2</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>10</span>
+        <span>3</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    1. örnekte tek alt satır olduğu için ilk sütun sıfırlandıktan sonra sistem doğrudan çözülmeye hazır hale gelir.
+  </div>
+
+  <p>Buradan <span class="eq">(5/2)<i>y</i> = 3</span> yani <span class="eq"><i>y</i> = 6/5</span> bulunur.</p>
+
+  <p>Birinci denklemde yerine yazarsak:</p>
+
+  <div class="mat-eq">
+    <span class="eq">2<i>x</i> + 6/5 = 10</span>
+    <span class="eq">2<i>x</i> = 44/5</span>
+    <span class="eq"><i>x</i> = 22/5</span>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i>, <i>y</i>) = (22/5, 6/5)</span>
+  </div>
+</div>
+
+<hr>
+
+<h3>3. Üç Bilinmeyenli Örnek</h3>
+
+<div class="question-block" id="gauss-soru-2">
+  <h4>2. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq">2<i>x</i><sub>1</sub> + 8<i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> = 14</span>
+    <span class="eq"><i>x</i><sub>1</sub> + 6<i>x</i><sub>2</sub> &minus; <i>x</i><sub>3</sub> = 13</span>
+    <span class="eq">2<i>x</i><sub>1</sub> &minus; <i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> = 5</span>
+    denklem sistemini çözünüz.
+  </div>
+
+  <p>Genişletilmiş matris:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>1</span><span>6</span><span>&minus;1</span><span>|</span>
+        <span>2</span><span>&minus;1</span><span>2</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>13</span>
+        <span>5</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Önce 1. sütunda, 1. satırdaki pivot kullanılarak <b>alttaki satırlar</b> temizlenir.
+    Sonra pivot bir satır aşağı ve bir sütun sağa geçer; yani bu kez 2. satırdaki pivot ile 2. sütunun altı temizlenir.
+    Burada kullanılan satır pivot satırıdır, sıfırlananlar ise onun <b>altındaki satırlar</b> olur.
+  </div>
+
+  <p>Burada 2. adıma geçerken 2. satırın kullanılmasının nedeni, 1. sütunda zaten elde edilmiş olan sıfırları korumaktır. Böylece yeni işlem yapılınca eski düzen bozulmaz.</p>
+
+  <p>Birinci sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;(1/2)S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>0</span><span>2</span><span>&minus;2</span><span>|</span>
+        <span>0</span><span>&minus;9</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>6</span>
+        <span>&minus;9</span>
+      </span>
+    </span>
+  </div>
+
+  <p>Bu adım sonunda 1. sütunda pivot 1. satırdadır ve altındaki elemanlar sıfır olmuştur.</p>
+
+  <p>İkinci sütunun altını da sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">(9/2)S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>0</span><span>2</span><span>&minus;2</span><span>|</span>
+        <span>0</span><span>0</span><span>&minus;9</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>6</span>
+        <span>18</span>
+      </span>
+    </span>
+  </div>
+
+  <p>Bu adımda da 2. satır pivot satırdır; onun altındaki 2. sütun elemanı sıfırlanır ve üst üçgen yapı tamamlanır.</p>
+
+  <p>Geriye doğru çözüm:</p>
+
+  <div style="margin-left:1.2em; line-height:1.9">
+    <div><span class="eq">&minus;9<i>x</i><sub>3</sub> = 18</span> <span class="eq"><i>x</i><sub>3</sub> = &minus;2</span></div>
+    <div><span class="eq">2<i>x</i><sub>2</sub> &minus; 2(&minus;2) = 6</span> <span class="eq">2<i>x</i><sub>2</sub> = 2</span> <span class="eq"><i>x</i><sub>2</sub> = 1</span></div>
+    <div><span class="eq">2<i>x</i><sub>1</sub> + 8(1) + 2(&minus;2) = 14</span> <span class="eq">2<i>x</i><sub>1</sub> = 10</span> <span class="eq"><i>x</i><sub>1</sub> = 5</span></div>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>) = (5, 1, &minus;2)</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="gauss-jordan-yok-etme">Gauss-Jordan Yok Etme Metodu</h2>
+
+<p>Gauss-Jordan yöntemi, Gauss yok etme metodunun devamı gibidir. Amaç sadece üst üçgen biçime ulaşmak değil, sol tarafı mümkün olduğunca <span class="kw">birim matrise</span> dönüştürmektir.</p>
+
+<div class="def">
+  <span class="kw">Gauss ile ortak kısım:</span>
+  İlk adımlar Gauss yok etme metodu ile aynıdır.
+  Yani önce pivotların <b>altındaki</b> elemanlar sıfırlanır ve eşelon yapı elde edilir.
+</div>
+
+<div class="note">
+  <b>Fark burada başlar:</b>
+  Gauss metodunda üst üçgen biçime gelince durup geriye doğru çözüm yapılır.
+  Gauss-Jordan metodunda ise devam edilir:
+  önce pivotlar <b>1 yapılır</b>, sonra her pivotun <b>üstü de sıfırlanır</b>.
+  Sonunda sol taraf birim matrise dönüşür ve bilinmeyenler doğrudan sağ taraftan okunur.
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>1</span><span>2</span><span>|</span>
+      <span>0</span><span>3</span><span>1</span><span>|</span>
+      <span>0</span><span>0</span><span>2</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>5</span>
+      <span>4</span>
+      <span>6</span>
+    </span>
+  </span>
+  <span class="ex-note">Gauss burada durabilir</span>
+</div>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>0</span><span>0</span><span>|</span>
+      <span>0</span><span>1</span><span>0</span><span>|</span>
+      <span>0</span><span>0</span><span>1</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span><i>x</i><sub>1</sub></span>
+      <span><i>x</i><sub>2</sub></span>
+      <span><i>x</i><sub>3</sub></span>
+    </span>
+  </span>
+  <span class="ex-note">Gauss-Jordan burada biter</span>
+</div>
+
+<hr>
+
+<h3>Örnek Soru</h3>
+
+<div class="question-block" id="gauss-jordan-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq">2<i>x</i><sub>1</sub> + 8<i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> = 14</span>
+    <span class="eq"><i>x</i><sub>1</sub> + 6<i>x</i><sub>2</sub> &minus; <i>x</i><sub>3</sub> = 13</span>
+    <span class="eq">2<i>x</i><sub>1</sub> &minus; <i>x</i><sub>2</sub> + 2<i>x</i><sub>3</sub> = 5</span>
+    denklem sistemini Gauss-Jordan yok etme metodu ile çözünüz.
+  </div>
+
+  <p>Genişletilmiş matris:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>1</span><span>6</span><span>&minus;1</span><span>|</span>
+        <span>2</span><span>&minus;1</span><span>2</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>13</span>
+        <span>5</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    <b>Buraya kadar Gauss ile aynıdır:</b>
+    önce 1. sütunun altı temizlenir, sonra 2. sütunun altı temizlenir.
+    Yani ilk kısımda yine eşelon biçime gideriz.
+  </div>
+
+  <p>1. adım: 1. sütunun altını sıfırlayalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;(1/2)S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>0</span><span>2</span><span>&minus;2</span><span>|</span>
+        <span>0</span><span>&minus;9</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>6</span>
+        <span>&minus;9</span>
+      </span>
+    </span>
+  </div>
+
+  <p>2. adım: 2. sütunun altını sıfırlayalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">(9/2)S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>2</span><span>8</span><span>2</span><span>|</span>
+        <span>0</span><span>2</span><span>&minus;2</span><span>|</span>
+        <span>0</span><span>0</span><span>&minus;9</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>14</span>
+        <span>6</span>
+        <span>18</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    <b>Kırmızı not mantığı burada:</b>
+    Gauss-Jordan'da buradan sonra durmuyoruz.
+    Köşegendeki pivotları <b>1 yapıyoruz</b> ve sonra bu pivotların <b>üstündeki</b> elemanları da sıfırlıyoruz.
+  </div>
+
+  <p>3. adım: Pivotları 1 yapalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">(1/2)S<sub>1</sub> &rarr; S<sub>1</sub></span>
+    <span class="eq">(1/2)S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">(&minus;1/9)S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>4</span><span>1</span><span>|</span>
+        <span>0</span><span>1</span><span>&minus;1</span><span>|</span>
+        <span>0</span><span>0</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>7</span>
+        <span>3</span>
+        <span>&minus;2</span>
+      </span>
+    </span>
+  </div>
+
+  <p>4. adım: 3. pivotun üstünü sıfırlayalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;S<sub>3</sub> + S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>4</span><span>0</span><span>|</span>
+        <span>0</span><span>1</span><span>0</span><span>|</span>
+        <span>0</span><span>0</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>9</span>
+        <span>1</span>
+        <span>&minus;2</span>
+      </span>
+    </span>
+  </div>
+
+  <p>5. adım: 2. pivotun üstünü sıfırlayalım.</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;4S<sub>2</sub> + S<sub>1</sub> &rarr; S<sub>1</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>0</span><span>0</span><span>|</span>
+        <span>0</span><span>1</span><span>0</span><span>|</span>
+        <span>0</span><span>0</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>1</span>
+        <span>&minus;2</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i><sub>1</sub>, <i>x</i><sub>2</sub>, <i>x</i><sub>3</sub>) = (5, 1, &minus;2)</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+
+<h2 id="cozum-durumlari">Lineer Denklem Sistemlerinin Çözüm Durumları</h2>
+
+<p>Bir lineer denklem sistemi genel olarak <b>tek çözüm</b>, <b>sonsuz çözüm</b> veya <b>çözüm yok</b> durumlarından birine sahiptir.</p>
+
+<div class="ex-row">
+  <div class="ex-item" style="align-items:flex-start">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>1</span><span>&minus;1</span><span>|</span>
+        <span>2</span><span>1</span><span>&minus;3</span><span>|</span>
+        <span>1</span><span>&minus;5</span><span>2</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>8</span>
+        <span>6</span>
+        <span>10</span>
+      </span>
+    </span>
+  </div>
+</div>
+
+<div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:0.8em 1.2em; margin:0.7em 0;">
+  <div class="def">
+    <b>Tek bir çözüm vardır.</b><br>
+    <span class="eq"><i>x</i> = 1</span><br>
+    <span class="eq"><i>y</i> = 2</span><br>
+    <span class="eq"><i>z</i> = 3</span>
+  </div>
+  <div class="def">
+    <b>Sonsuz çözüm vardır.</b><br>
+    <span class="eq"><i>x</i> = a + 5</span><br>
+    <span class="eq"><i>y</i> = 2a &minus; 1</span><br>
+    <span class="eq"><i>z</i> = a + 3</span>
+  </div>
+  <div class="note">
+    <b>Çözüm yoktur.</b><br>
+    Sistem çelişki üretir.
+  </div>
+</div>
+
+<div class="ex-row">
+  <div class="def">
+    <span class="kw">Tutarlı sistem</span> (Consistent system)<br>
+    Tek çözüm veya sonsuz çözüm vardır.
+  </div>
+  <div class="note">
+    <span class="kw">Tutarsız sistem</span> (Inconsistent system)<br>
+    Çözüm yoktur.
+  </div>
+</div>
+
+<hr>
+
+<h3>Gauss ile Yorum</h3>
+
+<p>Gauss yok etme metodunda amaç matrisi üst üçgen hale getirmektir. Çözüm durumu çoğu zaman en alt satırlara bakılarak anlaşılır.</p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span>
+      <span>0</span><span>1</span><span>7</span><span>|</span>
+      <span>0</span><span>0</span><span>a</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>2</span>
+      <span>5</span>
+      <span>8</span>
+    </span>
+  </span>
+</div>
+
+<div class="def">
+  Burada alt satırlarda <span class="eq">0 yapmaya</span> çalışırız. Üst üçgen hale geldikten sonra son satırın yapısı bize çözüm türünü söyler.
+</div>
+
+<p><span class="kw">1. Tek çözüm olması durumu:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span>
+      <span>0</span><span>5</span><span>7</span><span>|</span>
+      <span>0</span><span>0</span><span><i>m</i></span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>5</span>
+      <span>7</span>
+      <span>1</span>
+    </span>
+  </span>
+  <span class="ex-note"><i>m</i> sıfırdan farklıysa tek çözüm olabilir.</span>
+</div>
+
+<p><span class="kw">2. Sonsuz çözüm olması durumu:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span>
+      <span>0</span><span>1</span><span>2</span><span>|</span>
+      <span>0</span><span>0</span><span>0</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>5</span>
+      <span>0</span>
+      <span>0</span>
+    </span>
+  </span>
+  <span class="ex-note">En alt satırın hepsi 0 ise sonsuz çözüm vardır.</span>
+</div>
+
+<p><span class="kw">3. Çözüm yok durumu:</span></p>
+
+<div class="mat-eq">
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+      <span>1</span><span>2</span><span>3</span><span>|</span>
+      <span>0</span><span>1</span><span>4</span><span>|</span>
+      <span>0</span><span>0</span><span>0</span><span>|</span>
+    </span>
+  </span>
+  <span class="mat">
+    <span class="mat-cells" style="grid-template-columns: auto">
+      <span>2</span>
+      <span>5</span>
+      <span>7</span>
+    </span>
+  </span>
+  <span class="ex-note">Son satır <span class="eq">0 = 7</span> gibi bir çelişki verdiği için çözüm yoktur.</span>
+</div>
+
+<hr>
+
+<h3>Parametreli Örnekler</h3>
+
+<div class="question-block" id="cozum-durumlari-soru-1">
+  <h4>1. Soru ve Çözümü</h4>
+
+  <div class="def">
+    Üst üçgen halde verilen
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>3</span><span>2</span><span>|</span>
+        <span>0</span><span>4</span><span>7</span><span>|</span>
+        <span>0</span><span>0</span><span><i>m</i> + 3</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>5</span>
+        <span>2</span>
+        <span><i>n</i> + 2</span>
+      </span>
+    </span>
+    matrisi için:
+    <br>
+    a) tek çözüm
+    <br>
+    b) sonsuz çözüm
+    <br>
+    c) çözüm yok
+    durumlarında <i>m</i> ve <i>n</i> ne olmalıdır?
+  </div>
+
+  <div class="note">
+    Son satır belirleyicidir:
+    <span class="eq">(<i>m</i> + 3)<i>x</i><sub>3</sub> = <i>n</i> + 2</span>
+  </div>
+
+  <div class="def">
+    <b>a) Tek çözüm:</b>
+    <span class="eq"><i>m</i> + 3 ≠ 0</span>
+    yani
+    <span class="eq"><i>m</i> ≠ &minus;3</span>,
+    <span class="eq"><i>n</i> ∈ R</span>
+  </div>
+
+  <div class="def">
+    <b>b) Sonsuz çözüm:</b>
+    Son satırın tamamen 0 olması gerekir.
+    <span class="eq"><i>m</i> + 3 = 0</span> ve <span class="eq"><i>n</i> + 2 = 0</span>
+    <br>
+    <span class="eq"><i>m</i> = &minus;3</span>, <span class="eq"><i>n</i> = &minus;2</span>
+  </div>
+
+  <div class="note">
+    <b>c) Çözüm yok:</b>
+    Sol taraf 0 olurken sağ taraf 0 olmamalıdır.
+    <span class="eq"><i>m</i> = &minus;3</span>, <span class="eq"><i>n</i> ≠ &minus;2</span>
+  </div>
+</div>
+
+<div class="question-block" id="cozum-durumlari-soru-2">
+  <h4>2. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>|</span>
+        <span>3</span><span>1</span><span>4</span><span>|</span>
+        <span>2</span><span>5</span><span><i>k</i></span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>2</span>
+        <span>&minus;1</span>
+        <span><i>n</i></span>
+      </span>
+    </span>
+    matrisi için:
+    <br>
+    a) tek çözüm
+    <br>
+    b) sonsuz çözüm
+    <br>
+    c) çözüm yok
+    durumlarında <i>k</i> ve <i>n</i> ne olmalıdır?
+  </div>
+
+  <p>Önce satır işlemleri uygulayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;3S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;2S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>|</span>
+        <span>0</span><span>&minus;5</span><span>7</span><span>|</span>
+        <span>0</span><span>1</span><span><i>k</i> + 2</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>2</span>
+        <span>&minus;7</span>
+        <span><i>n</i> &minus; 4</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="eq">(1/5)S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>2</span><span>&minus;1</span><span>|</span>
+        <span>0</span><span>&minus;5</span><span>7</span><span>|</span>
+        <span>0</span><span>0</span><span><i>k</i> + 17/5</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>2</span>
+        <span>&minus;7</span>
+        <span><i>n</i> &minus; 27/5</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="def">
+    <b>a) Tek çözüm:</b>
+    <span class="eq"><i>k</i> + 17/5 ≠ 0</span>
+    yani
+    <span class="eq"><i>k</i> ≠ &minus;17/5</span>,
+    <span class="eq"><i>n</i> ∈ R</span>
+  </div>
+
+  <div class="def">
+    <b>b) Sonsuz çözüm:</b>
+    <span class="eq"><i>k</i> + 17/5 = 0</span> ve <span class="eq"><i>n</i> &minus; 27/5 = 0</span>
+    <br>
+    <span class="eq"><i>k</i> = &minus;17/5</span>, <span class="eq"><i>n</i> = 27/5</span>
+  </div>
+
+  <div class="note">
+    <b>c) Çözüm yok:</b>
+    <span class="eq"><i>k</i> = &minus;17/5</span>, <span class="eq"><i>n</i> ≠ 27/5</span>
+  </div>
+</div>
+
+<div class="question-block" id="cozum-durumlari-soru-3">
+  <h4>3. Soru ve Çözümü</h4>
+
+  <div class="def">
+    <span class="eq"><i>x</i> &minus; 2<i>y</i> + <i>z</i> = 1</span>
+    <span class="eq">2<i>x</i> &minus; 5<i>y</i> + 3<i>z</i> = 4</span>
+    <span class="eq"><i>x</i> &minus; 3<i>y</i> + <i>z</i> = 0</span>
+    lineer denklem sisteminin çözümünü bulunuz.
+  </div>
+
+  <p>Genişletilmiş matris yazılır:</p>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>1</span><span>|</span>
+        <span>2</span><span>&minus;5</span><span>3</span><span>|</span>
+        <span>1</span><span>&minus;3</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>1</span>
+        <span>4</span>
+        <span>0</span>
+      </span>
+    </span>
+  </div>
+
+  <p>İlk sütunun altını sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;2S<sub>1</sub> + S<sub>2</sub> &rarr; S<sub>2</sub></span>
+    <span class="eq">&minus;S<sub>1</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>1</span><span>|</span>
+        <span>0</span><span>&minus;1</span><span>1</span><span>|</span>
+        <span>0</span><span>&minus;1</span><span>0</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>1</span>
+        <span>2</span>
+        <span>&minus;1</span>
+      </span>
+    </span>
+  </div>
+
+  <p>İkinci sütunda da alt elemanı sıfırlayalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">S<sub>2</sub> + S<sub>3</sub> &rarr; S<sub>3</sub></span>
+  </div>
+
+  <div class="mat-eq">
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: repeat(4, auto)">
+        <span>1</span><span>&minus;2</span><span>1</span><span>|</span>
+        <span>0</span><span>&minus;1</span><span>1</span><span>|</span>
+        <span>0</span><span>0</span><span>1</span><span>|</span>
+      </span>
+    </span>
+    <span class="mat">
+      <span class="mat-cells" style="grid-template-columns: auto">
+        <span>1</span>
+        <span>2</span>
+        <span>1</span>
+      </span>
+    </span>
+  </div>
+
+  <div class="note">
+    Görseldeki sonsuz çözüm mantığı için son satırın tamamen 0 olması gerekir. Bu sistemde son satırda
+    <span class="eq"><i>z</i> = 1</span>
+    çıktığı için aslında serbest değişken kalmaz ve çözüm tek olur.
+  </div>
+
+  <p>Son satırdan <span class="eq"><i>z</i> = 1</span> bulunur.</p>
+
+  <p>İkinci satıra yazalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq">&minus;<i>y</i> + <i>z</i> = 2</span>
+    <span class="eq">&minus;<i>y</i> + 1 = 2</span>
+    <span class="eq"><i>y</i> = &minus;1</span>
+  </div>
+
+  <p>Birinci satıra yazalım:</p>
+
+  <div class="mat-eq">
+    <span class="eq"><i>x</i> &minus; 2(&minus;1) + 1 = 1</span>
+    <span class="eq"><i>x</i> + 3 = 1</span>
+    <span class="eq"><i>x</i> = &minus;2</span>
+  </div>
+
+  <div class="def">
+    <b>Çözüm:</b>
+    <span class="eq">(<i>x</i>, <i>y</i>, <i>z</i>) = (&minus;2, &minus;1, 1)</span>
+  </div>
+</div>
 
 </body>
 </html>
